@@ -51,7 +51,7 @@ public class Driver {
 
 
     motor1.getDcMotor().setPower(speed * Math.sin(angle - (Math.PI / 4)));
-    motor2.getDcMotor().setPower(speed * -Math.cos(angle - (Math.PI / 4)));
+    motor2.getDcMotor().setPower(speed * Math.cos(angle - (Math.PI / 4)));
     motor3.getDcMotor().setPower(speed * Math.cos(angle + (Math.PI / 4)));
     motor4.getDcMotor().setPower(speed * Math.sin(angle + (Math.PI / 4)));
 

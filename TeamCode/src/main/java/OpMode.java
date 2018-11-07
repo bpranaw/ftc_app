@@ -79,7 +79,7 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
             this.getRobot().getMotor2().getDcMotor().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             this.getRobot().getMotor3().getDcMotor().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             this.getRobot().getMotor4().getDcMotor().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            this.getRobot().getMotor5().getDcMotor().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            this.getRobot().getMotor5().getDcMotor().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
 
         new Thread(new Runnable() { public void run() {
