@@ -1,6 +1,7 @@
 package com.arinerron.ftc;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
@@ -18,7 +19,7 @@ public class TestOpMode extends com.qualcomm.robotcore.eventloop.opmode.OpMode {
     private Robot robot = null;
     private ElapsedTime timer = new ElapsedTime();
 
-    public OpMode() {
+    public TestOpMode() {
 
     }
 
