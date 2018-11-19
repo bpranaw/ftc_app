@@ -29,7 +29,8 @@ public class Robot {
         this.m2 = new Motor(this, this.getOpMode().getMotor(Constants.M2_MOTOR));
         this.m3 = new Motor(this, this.getOpMode().getMotor(Constants.M3_MOTOR));
         this.m4 = new Motor(this, this.getOpMode().getMotor(Constants.M4_MOTOR));
-        this.m5 = new Motor(this, this.getOpMode().getMotor(Constants.M5_MOTOR));
+        this.s1 = new Servo(this, this.getOpMode().getServo(Constants.S1_Motor));
+       // this.m5 = new Motor(this, this.getOpMode().getMotor(Constants.M5_MOTOR));
         // this.s1 = new Servo(this, this.getOpMode().getServo(Constants.S1_SERVO)); // uncomment to enable servo
         // this.s1.setCenter(0.5);
 
@@ -38,7 +39,7 @@ public class Robot {
         this.getMotor2().setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
         this.getMotor3().setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
         this.getMotor4().setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        this.getMotor5().setDriveMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+       // this.getMotor5().setDriveMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         this.driver = new Driver(this);
 
@@ -74,7 +75,7 @@ public class Robot {
         this.getMotor2().reset();
         this.getMotor3().reset();
         this.getMotor4().reset();
-        this.getMotor5().reset();
+        //this.getMotor5().reset();
     }
 
     /* set power on all motors */
@@ -83,10 +84,10 @@ public class Robot {
     }
 
     /* set power on all motors */
-    public Driver drive(double speed, double angle, double rotation) {
+    public Driver drive(double height, double angle, double rotation) {
         Driver driver = this.getDriver();
 
-        driver.setSpeed(speed);
+        driver.setHeight(height);
         driver.setDirection(angle);
         driver.setRotation(rotation);
 
@@ -108,7 +109,7 @@ public class Robot {
     public Motor getMotor4() {
         return this.m4;
     }
-    public Motor getMotor5() {
+   /* public Motor getMotor5() {
         return this.m5;
     }
 
@@ -137,4 +138,89 @@ public class Robot {
         timer.reset();
         while(timer.seconds() < seconds);
     }
+
+    /*
+    Landing Function (Autonomous)
+    Arguments:
+        Power(double: Sets power to motors (preset direction)
+        Time(double): Amount of time motors should have power
+    Task:
+        Executes the Landing maneuver.
+        1)Brings robot down by extending arm(motor 3) for an amount of time
+        2)Rotates in the right direction (topside view)
+    */
+    public void Land( double power, double time) {
+        this.getMotor3().setPower(-power);
+        this.wait(1.0 * time);
+        this.getMotor3().setPower(0);
+    }
+
+    /*
+    Left Rotate Function (Topside View)
+    Arguments:
+        Speed: Speed of rotation
+        Time: Time which robot will rotate.
+    Task:
+        Rotates left
+    */
+    public void LRot ( double speed, double time)
+    {
+        this.getMotor1().setPower(speed);
+        this.getMotor2().setPower(speed);
+        this.wait(time);
+        this.getMotor1().setPower(0);
+        this.getMotor2().setPower(0);
+    }
+
+    /*
+     Rotate Right Function (Topside View)
+     Arguments:
+         Speed: Speed of rotation
+         Time: Time which robot will rotate.
+     Task:
+         Rotates right
+     */
+    public void RRot ( double speed, double time)
+    {
+        this.getMotor1().setPower(-speed);
+        this.getMotor2().setPower(-speed);
+        this.wait(time);
+        this.getMotor1().setPower(0);
+        this.getMotor2().setPower(0);
+    }
+
+    /*
+     Forward Function (Topside View)
+     Arguments:
+         Speed: Speed of movement
+         Time: Time which robot will move forward
+     Task:
+         Goes forward
+     */
+    public void Forward (double speed, double time)
+    {
+        this.getMotor1().setPower(-speed);
+        this.getMotor2().setPower(speed);
+        this.wait(time);
+        this.getMotor1().setPower(0);
+        this.getMotor2().setPower(0);
+    }
+
+    /*
+    Backward Function (Topside View)
+    Arguments:
+        Speed: Speed of movement
+        Time: Time which robot will move backward
+    Task:
+        Goes backward
+    */
+    public void Backward (double speed, double time)
+    {
+        this.getMotor1().setPower(speed);
+        this.getMotor2().setPower(-speed);
+        this.wait(time);
+        this.getMotor1().setPower(0);
+        this.getMotor2().setPower(0);
+    }
+
 }

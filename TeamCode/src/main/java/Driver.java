@@ -18,7 +18,7 @@ public class Driver {
     private final double[] straight /*0*/ = {1, 0.2, 0.7, 0.3}, ff /*1*/ = {0.6, 0.6, 0.3, 0.6}, ninety /*-1*/ = {0.3, 0.9, 0, 1};
     private double dir = 0;
     private double rotate = 0;
-    private double speed = 1;
+    private double height = 0;
 
 
     public Driver() {
@@ -28,8 +28,8 @@ public class Driver {
         this.dir = direction;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
+    public void setHeight(double height) {
+        this.height = height;
     }
 
     public void setRotation(double rotate) {
@@ -38,7 +38,9 @@ public class Driver {
 
 
     public Driver drive() {
-        double angle = dir;
+        //double angle = dir;
+        double mult = dir;
+        double multe = height;
 
                 //angle = Math.IEEEremainder(angle, Math.PI * 2);
 
@@ -46,14 +48,33 @@ public class Driver {
         Motor motor2 = this.getRobot().getMotor2();
         Motor motor3 = this.getRobot().getMotor3();
         Motor motor4 = this.getRobot().getMotor4();
+        Servo servo1 = this.getRobot().getServo1();
 
-        Motor motor5 = this.getRobot().getMotor5();
+      //  Motor motor5 = this.getRobot().getMotor5();
 
-
+/*
     motor1.getDcMotor().setPower(speed * Math.sin(angle - (Math.PI / 4)));
     motor2.getDcMotor().setPower(speed * Math.cos(angle - (Math.PI / 4)));
     motor3.getDcMotor().setPower(speed * Math.cos(angle + (Math.PI / 4)));
     motor4.getDcMotor().setPower(speed * Math.sin(angle + (Math.PI / 4)));
+    */
+        motor3.getDcMotor().setPower(multe);
+
+        if (rotate >0)
+        {
+            motor1.getDcMotor().setPower(1);
+            motor2.getDcMotor().setPower(1);
+        }
+        else if (rotate <0)
+        {
+            motor1.getDcMotor().setPower(-1);
+            motor2.getDcMotor().setPower(-1);
+        }
+        else {
+            motor1.getDcMotor().setPower(mult);
+            motor2.getDcMotor().setPower(-mult);
+        }
+
 
         return this;
     }
@@ -63,7 +84,7 @@ public class Driver {
         this.getRobot().getMotor2().setPower(0);
         this.getRobot().getMotor3().setPower(0);
         this.getRobot().getMotor4().setPower(0);
-        this.getRobot().getMotor5().setPower(0);
+        //this.getRobot().getMotor5().setPower(0);
     }
 
     public void check() {/*

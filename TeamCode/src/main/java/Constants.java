@@ -9,7 +9,8 @@ public class Constants {
     public static final String M2_MOTOR = "motor2";
     public static final String M3_MOTOR = "motor3";
     public static final String M4_MOTOR = "motor4";
-    public static final String M5_MOTOR = "motor5";
+    public static final String S1_Motor = "servo1";
+    //public static final String M5_MOTOR = "motor5";
 
     /* define sensor names. empty string disables sensor. */
     public static final String COLOR_SENSOR = "";
@@ -18,4 +19,8 @@ public class Constants {
     /* thresholds */
     public static final double TRIGGER_THRESHOLD = 0.1;
     public static final double COLOR_THRESHOLD = 0.5;
+
+    //Servo positions
+    public static final double Rest_Pos = 0.8;
+    public static final double Close_Pos = 0.3;
 }
