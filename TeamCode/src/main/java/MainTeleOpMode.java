@@ -76,16 +76,16 @@ public class MainTeleOpMode extends TeleOpMode {
             this.getRobot().getServo1().setPosition(pos);
         }
 
-        if(rb) {
+        /*if(rb) {
             multiplier = -0.5;
         } else if(lb) {
             multiplier = 0.5;
-        }
+        }*/
 
         this.getRobot().getDriver().setHeight(multiplier);
         driver.drive();
 
-        if(Math.abs(ly) >= Constants.TRIGGER_THRESHOLD)
+        /*if(Math.abs(ly) >= Constants.TRIGGER_THRESHOLD)
         {
 
             if (ly >= Constants.TRIGGER_THRESHOLD)
@@ -120,6 +120,16 @@ public class MainTeleOpMode extends TeleOpMode {
             this.getRobot().reset();
             driver.setDirection(0);
             driver.setRotation(0);
+        }*/
+
+        if(Math.abs(ry) >= Constants.TRIGGER_THRESHOLD) {
+            this.getRobot().getMotor1().setPower(ry);
+            this.getRobot().getMotor2().setPower(ry);
+        } else if (Math.abs(rx) >= Constants.TRIGGER_THRESHOLD) {
+            this.getRobot().getMotor1().setPower(rx);
+            this.getRobot().getMotor2().setPower(-rx);
+        } else {
+            this.getRobot().reset();
         }
 
     }
