@@ -12,7 +12,8 @@ public class MainTeleOpMode extends TeleOpMode {
     @Override
     public void run() {
         // this runs when you tap the play button
-        this.getRobot().getServo1().setPosition(Constants.Close_Pos);
+        this.wait(1.0);
+        this.getRobot().getServo1().setPosition(Constants.Rest_Pos);
     }
 
     @Override
@@ -30,6 +31,7 @@ public class MainTeleOpMode extends TeleOpMode {
         boolean open = this.getGamepadA().y;
         boolean close = this.getGamepadA().x;
         double pos = this.getRobot().getServo1().getPosition();
+        double pos2 = this.getRobot().getServo2().getPosition();
 
 
         double multiplier = 0;
@@ -80,9 +82,9 @@ public class MainTeleOpMode extends TeleOpMode {
             multiplier = -0.5;
         } else if(lb) {
             multiplier = 0.5;
-        }*/
+        }
 
-        this.getRobot().getDriver().setHeight(multiplier);
+        this.getRobot().getDriver().setHeight(multiplier); */
         driver.drive();
 
         /*if(Math.abs(ly) >= Constants.TRIGGER_THRESHOLD)
@@ -122,15 +124,50 @@ public class MainTeleOpMode extends TeleOpMode {
             driver.setRotation(0);
         }*/
 
-        if(Math.abs(ry) >= Constants.TRIGGER_THRESHOLD) {
-            this.getRobot().getMotor1().setPower(ry);
-            this.getRobot().getMotor2().setPower(ry);
-        } else if (Math.abs(rx) >= Constants.TRIGGER_THRESHOLD) {
-            this.getRobot().getMotor1().setPower(rx);
-            this.getRobot().getMotor2().setPower(-rx);
-        } else {
+        if(Math.abs(ry) >= Constants.TRIGGER_THRESHOLD || Math.abs(ly) >= Constants.TRIGGER_THRESHOLD) {
+            this.getRobot().getMotor1().setPower(ly);
+            this.getRobot().getMotor2().setPower(-ry);
+            }
+            else
+                {
             this.getRobot().reset();
+
         }
 
+
+
+      if( rt >= Constants.TRIGGER_THRESHOLD || lt >= Constants.TRIGGER_THRESHOLD )
+        {
+            if (rt > lt)
+            {
+                this.getRobot().getMotor3().setPower(-1);
+
+            }
+            else
+            {
+                this.getRobot().getMotor3().setPower(1);
+            }
+         }
+        else
+        {
+            this.getRobot().getMotor3().setPower(0);
+        }
+
+
+
+/*
+        if (rb){
+            this.getRobot().getServo2().setPosition(Constants.Pull_Pos);
+        }
+        /*else if (lb) {
+            this.getRobot().getServo2().setPosition(Constants.Block_Pos);
+        }
+        else {
+            this.getRobot().getServo2().setPosition(Constants.Block_Pos);
+        }
+        */
+        this.write("here");
+
     }
+
 }

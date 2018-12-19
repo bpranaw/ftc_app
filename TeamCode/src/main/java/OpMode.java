@@ -1,7 +1,9 @@
 import android.provider.SyncStateContract;
 
+
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -56,8 +58,7 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
         if(this.getHardwareMap() != null)
             this.robot = new Robot(this);
 
-        if(this.getRobot().getColorSensor() != null)
-            this.getRobot().getColorSensor().enableLed(true);
+
     }
 
     @Override
@@ -114,6 +115,8 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
         return this.robot;
     }
 
+
+
     public DcMotor getMotor(String name) {
         return this.getHardwareMap().dcMotor.get(name);
     }
@@ -122,13 +125,6 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
         return this.getHardwareMap().servo.get(name);
     }
 
-    public ColorSensor getColorSensor(String name) {
-        return this.getHardwareMap().colorSensor.get(name);
-    }
-
-    public GyroSensor getGyroSensor(String name) {
-        return this.getHardwareMap().gyroSensor.get(name);
-    }
 
     public boolean isColor(double r, double g, double b, String name) {
         name = name.toLowerCase(); // get the lower case version of the name

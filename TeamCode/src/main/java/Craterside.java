@@ -7,12 +7,21 @@ public class Craterside extends OpMode {
     public void run() {
 
 
-        //Hold Ontro marker
-        this.getRobot().getServo1().setPosition(Constants.Close_Pos);
+        //Hold Onto marker
+
         //Landing / Unhooking
-        this.getRobot().Land(0.25, 8.5);
-        this.getRobot().RRot(0.5, 0.8);
-        this.getRobot().Forward(1.0,1);
+        //this.getRobot().Land(0.25, 8.5);
+       // this.getRobot().LRot(1, 0.25);
+
+        //Reorientation
+       // this.getRobot().Forward(0.25, 0.75);
+       // this.getRobot().RRot(0.5, 0.55);
+
+        this.getRobot().Forward(1,0.2);
+        this.wait(0.5);
+        this.getRobot().RRot(1,0.6);
+        this.wait(0.5);
+        this.getRobot().Backward(1,0.65);
 
     }
 

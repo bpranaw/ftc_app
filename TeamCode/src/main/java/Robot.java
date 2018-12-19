@@ -1,5 +1,8 @@
 import com.qualcomm.robotcore.hardware.*;
 import com.qualcomm.robotcore.util.*;
+import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
+
 
 public class Robot {
     private ElapsedTime timer = new ElapsedTime(); // strictly for the wait function!
@@ -11,11 +14,18 @@ public class Robot {
     private Motor m4 = null;
     private Motor m5 = null;
 
+
     // servos
     private Servo s1 = null;
+    private Servo s2 = null;
 
-    private ColorSensor sensorColor = null;
+    //Sensors
+
+    private ColorSensor cs1 = null;
+    private ColorSensor cs2 = null;
     private GyroSensor sensorGyro = null;
+
+
     private OpMode mode = null;
 
     private Driver driver = null;
@@ -30,6 +40,7 @@ public class Robot {
         this.m3 = new Motor(this, this.getOpMode().getMotor(Constants.M3_MOTOR));
         this.m4 = new Motor(this, this.getOpMode().getMotor(Constants.M4_MOTOR));
         this.s1 = new Servo(this, this.getOpMode().getServo(Constants.S1_Motor));
+        this.s2 = new Servo(this, this.getOpMode().getServo(Constants.S2_Motor));
        // this.m5 = new Motor(this, this.getOpMode().getMotor(Constants.M5_MOTOR));
         // this.s1 = new Servo(this, this.getOpMode().getServo(Constants.S1_SERVO)); // uncomment to enable servo
         // this.s1.setCenter(0.5);
@@ -44,10 +55,10 @@ public class Robot {
         this.driver = new Driver(this);
 
         // define sensors
-        if(Constants.COLOR_SENSOR != null && Constants.COLOR_SENSOR.length() != 0)
-            this.sensorColor = this.getOpMode().getColorSensor(Constants.COLOR_SENSOR);
-        if(Constants.GYRO_SENSOR != null && Constants.GYRO_SENSOR.length() != 0)
-            this.sensorGyro = this.getOpMode().getGyroSensor(Constants.GYRO_SENSOR);
+        cs1 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color1");
+        cs2 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color2");
+
+        //cs2 = this.getOpMode().getColorSensor(Constants.COLOR_SENSOR2);
 
         // calibrate sensors
         if(this.getGyroSensor() != null)
@@ -117,6 +128,7 @@ public class Robot {
     public Servo getServo1() {
         return this.s1;
     }
+    public Servo getServo2() { return this.s2;}
 
     /* get Opmode */
     public OpMode getOpMode() {
@@ -124,9 +136,8 @@ public class Robot {
     }
 
     /* get color sensor */
-    public ColorSensor getColorSensor() {
-        return this.sensorColor;
-    }
+    public ColorSensor getColorSensor1() { return this.cs1; }
+    //public ColorSensor getColorSensor2() { return this.cs2; }
 
     /* get gyro sensor */
     public GyroSensor getGyroSensor() {
@@ -134,10 +145,11 @@ public class Robot {
     }
 
     /* wait x seconds */
-    private void wait(double seconds) {
+    public void wait(double seconds) {
         timer.reset();
         while(timer.seconds() < seconds);
     }
+
 
     /*
     Landing Function (Autonomous)
@@ -199,8 +211,8 @@ public class Robot {
      */
     public void Forward (double speed, double time)
     {
-        this.getMotor1().setPower(-speed);
-        this.getMotor2().setPower(speed);
+        this.getMotor1().setPower(speed);
+        this.getMotor2().setPower(-speed);
         this.wait(time);
         this.getMotor1().setPower(0);
         this.getMotor2().setPower(0);
@@ -216,8 +228,8 @@ public class Robot {
     */
     public void Backward (double speed, double time)
     {
-        this.getMotor1().setPower(speed);
-        this.getMotor2().setPower(-speed);
+        this.getMotor1().setPower(-speed);
+        this.getMotor2().setPower(speed);
         this.wait(time);
         this.getMotor1().setPower(0);
         this.getMotor2().setPower(0);

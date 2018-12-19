@@ -49,6 +49,7 @@ public class Driver {
         Motor motor3 = this.getRobot().getMotor3();
         Motor motor4 = this.getRobot().getMotor4();
         Servo servo1 = this.getRobot().getServo1();
+        Servo servo2 = this.getRobot().getServo2();
 
       //  Motor motor5 = this.getRobot().getMotor5();
 
