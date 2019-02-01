@@ -56,7 +56,7 @@ public class Robot {
 
         // define sensors
         cs1 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color1");
-        cs2 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color2");
+
 
         //cs2 = this.getOpMode().getColorSensor(Constants.COLOR_SENSOR2);
 
