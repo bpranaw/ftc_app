@@ -11,8 +11,11 @@ public class Constants {
     public static final String M2_MOTOR = "motor2";
     public static final String M3_MOTOR = "motor3";
     public static final String M4_MOTOR = "motor4";
-    public static final String S1_Motor = "servo1";
-    public static final String S2_Motor = "servo6";
+    public static final String S1_Servo = "servo1";
+    public static final String S2_Servo = "servo2";
+    public static final String S3_Servo = "servo3";
+    public static final String S4_Servo = "servo4";
+
     //public static final String M5_MOTOR = "motor5";
 
     /* thresholds */

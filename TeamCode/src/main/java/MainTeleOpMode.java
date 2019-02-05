@@ -24,19 +24,20 @@ public class MainTeleOpMode extends TeleOpMode {
         double ry = this.getGamepadA().right_stick_y;
         double rt = this.getGamepadA().right_trigger;
         double lt = this.getGamepadA().left_trigger;
+        double ly2 = this.getGamepadB().left_stick_y;
 
         boolean rb = this.getGamepadA().right_bumper;
         boolean lb = this.getGamepadA().left_bumper;
+        boolean lb2 = this.getGamepadB().left_bumper;
+        boolean rb2 = this.getGamepadB().right_bumper;
 
         boolean open = this.getGamepadA().y;
         boolean close = this.getGamepadA().x;
         double pos = this.getRobot().getServo1().getPosition();
-        double pos2 = this.getRobot().getServo2().getPosition();
 
 
-        double multiplier = 0;
 
-
+        //Aaron's Thing
         if(Double.isNaN(rx) || Double.isNaN(ry)) {
             rx = 0;
             ry = 0;
@@ -49,24 +50,8 @@ public class MainTeleOpMode extends TeleOpMode {
 
 
         Driver driver = this.getRobot().getDriver();
-        //Check of controller input
-        /*if(Math.abs(rx) >= Constants.TRIGGER_THRESHOLD || Math.abs(ry) >= Constants.TRIGGER_THRESHOLD) {
-            double angle = Math.atan2(ry, rx);
 
-
-            if (angle <= 0) {
-                angle += Math.PI * 2;
-            }
-
-            driver.setDirection(angle);
-            driver.setRotation(rotate);
-            driver.setSpeed(1.0);
-
-            driver.drive();
-        } */
-        //TEST
-        //TEST
-
+        //Claw
         if(open)
         {
             this.getRobot().getServo1().setPosition(Constants.Close_Pos);
@@ -78,51 +63,10 @@ public class MainTeleOpMode extends TeleOpMode {
             this.getRobot().getServo1().setPosition(pos);
         }
 
-        /*if(rb) {
-            multiplier = -0.5;
-        } else if(lb) {
-            multiplier = 0.5;
-        }
-
-        this.getRobot().getDriver().setHeight(multiplier); */
         driver.drive();
 
-        /*if(Math.abs(ly) >= Constants.TRIGGER_THRESHOLD)
-        {
 
-            if (ly >= Constants.TRIGGER_THRESHOLD)
-            {
-                driver.setDirection(1);
-            }
-            else
-            {
-                driver.setDirection(-1);
-            }
-            driver.drive();
-
-        }
-        else if( rt >= Constants.TRIGGER_THRESHOLD || lt >= Constants.TRIGGER_THRESHOLD )
-        {
-            if (rt > lt)
-            {
-                driver.setDirection(0);
-                driver.setRotation(-1);
-
-            }
-            else
-            {
-                driver.setDirection(0);
-                driver.setRotation(1);
-            }
-            driver.drive();
-
-        }
-        else
-        {
-            this.getRobot().reset();
-            driver.setDirection(0);
-            driver.setRotation(0);
-        }*/
+        //Drive Base momvent
 
         if(Math.abs(ry) >= Constants.TRIGGER_THRESHOLD || Math.abs(ly) >= Constants.TRIGGER_THRESHOLD) {
             this.getRobot().getMotor1().setPower(ly);
@@ -135,7 +79,7 @@ public class MainTeleOpMode extends TeleOpMode {
         }
 
 
-
+        //Hook slide Movement
       if( rt >= Constants.TRIGGER_THRESHOLD || lt >= Constants.TRIGGER_THRESHOLD )
         {
             if (rt > lt)
@@ -153,19 +97,27 @@ public class MainTeleOpMode extends TeleOpMode {
             this.getRobot().getMotor3().setPower(0);
         }
 
+        //Suction
+        double pos3= this.getRobot().getServo3().getPosition();
+        double pos4= this.getRobot().getServo4().getPosition();
+        if (rb2){
+            this.getRobot().getServo3().setPosition(1);
+            this.getRobot().getServo3().setPosition(-1);
+        }
+        else if (lb){
+            this.getRobot().getServo3().setPosition(-1);
+            this.getRobot().getServo3().setPosition(1);
+        }
+        else{
+            this.getRobot().getServo3().reset();
+            this.getRobot().getServo4().reset();
+        }
+
+        if(ly2 > 0 || ly2 < 0) {
+            this.getRobot().getMotor4().setPower(ly2);
+        }
 
 
-/*
-        if (rb){
-            this.getRobot().getServo2().setPosition(Constants.Pull_Pos);
-        }
-        /*else if (lb) {
-            this.getRobot().getServo2().setPosition(Constants.Block_Pos);
-        }
-        else {
-            this.getRobot().getServo2().setPosition(Constants.Block_Pos);
-        }
-        */
         this.write("here");
 
     }

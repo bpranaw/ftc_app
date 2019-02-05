@@ -2,6 +2,7 @@ import android.provider.SyncStateContract;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -123,6 +124,10 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
 
     public Servo getServo(String name) {
         return this.getHardwareMap().servo.get(name);
+    }
+
+    public CRServo getCRServo(String name) {
+        return this.getHardwareMap().crservo.get(name);
     }
 
 

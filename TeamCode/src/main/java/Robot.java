@@ -16,8 +16,11 @@ public class Robot {
 
 
     // servos
-    private Servo s1 = null;
-    private Servo s2 = null;
+    private Servo s1;
+    private Servo s2;
+    private Servo s3;
+    private Servo s4;
+
 
     //Sensors
 
@@ -39,8 +42,10 @@ public class Robot {
         this.m2 = new Motor(this, this.getOpMode().getMotor(Constants.M2_MOTOR));
         this.m3 = new Motor(this, this.getOpMode().getMotor(Constants.M3_MOTOR));
         this.m4 = new Motor(this, this.getOpMode().getMotor(Constants.M4_MOTOR));
-        this.s1 = new Servo(this, this.getOpMode().getServo(Constants.S1_Motor));
-        this.s2 = new Servo(this, this.getOpMode().getServo(Constants.S2_Motor));
+        this.s1 = new Servo(this, this.getOpMode().getServo(Constants.S1_Servo));
+        this.s2 = new Servo(this, this.getOpMode().getServo(Constants.S2_Servo));
+        this.s3 = new Servo(this, this.getOpMode().getServo(Constants.S3_Servo));
+        this.s4 = new Servo(this, this.getOpMode().getServo(Constants.S4_Servo));
        // this.m5 = new Motor(this, this.getOpMode().getMotor(Constants.M5_MOTOR));
         // this.s1 = new Servo(this, this.getOpMode().getServo(Constants.S1_SERVO)); // uncomment to enable servo
         // this.s1.setCenter(0.5);
@@ -125,10 +130,10 @@ public class Robot {
     }
 
     /* get servos */
-    public Servo getServo1() {
-        return this.s1;
-    }
-    public Servo getServo2() { return this.s2;}
+    public Servo getServo1() {return this.s1;}
+    public Servo getServo2() {return this.s2;}
+    public Servo getServo3() {return this.s3;}
+    public Servo getServo4() {return this.s4;}
 
     /* get Opmode */
     public OpMode getOpMode() {
@@ -165,6 +170,7 @@ public class Robot {
         this.getMotor3().setPower(-power);
         this.wait(1.0 * time);
         this.getMotor3().setPower(0);
+        this.wait(0.2);
     }
 
     /*
@@ -182,6 +188,7 @@ public class Robot {
         this.wait(time);
         this.getMotor1().setPower(0);
         this.getMotor2().setPower(0);
+        this.wait(0.2);
     }
 
     /*
@@ -199,6 +206,7 @@ public class Robot {
         this.wait(time);
         this.getMotor1().setPower(0);
         this.getMotor2().setPower(0);
+        this.wait(0.2);
     }
 
     /*
@@ -216,6 +224,7 @@ public class Robot {
         this.wait(time);
         this.getMotor1().setPower(0);
         this.getMotor2().setPower(0);
+        this.wait(0.2);
     }
 
     /*
@@ -233,6 +242,7 @@ public class Robot {
         this.wait(time);
         this.getMotor1().setPower(0);
         this.getMotor2().setPower(0);
+        this.wait(0.2);
     }
 
 }

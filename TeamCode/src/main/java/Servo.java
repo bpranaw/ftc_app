@@ -1,3 +1,4 @@
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Servo {
@@ -12,7 +13,7 @@ public class Servo {
         this.robot = robot;
     }
 
-    /* replaces the NaN with valid data. should be run once opmode is started */
+       /* replaces the NaN with valid data. should be run once opmode is started */
     public void fix() {
         if(Double.isNaN(this.getPosition()))
             this.setPosition(this.getCenter());
