@@ -26,6 +26,7 @@ public class Robot {
 
     private ColorSensor cs1 = null;
     private ColorSensor cs2 = null;
+    private ColorSensor cs3 = null;
     private GyroSensor sensorGyro = null;
 
 
@@ -61,9 +62,9 @@ public class Robot {
 
         // define sensors
         cs1 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color1");
+        cs2 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color2");
+        cs3 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color3");
 
-
-        //cs2 = this.getOpMode().getColorSensor(Constants.COLOR_SENSOR2);
 
         // calibrate sensors
         if(this.getGyroSensor() != null)
@@ -243,6 +244,81 @@ public class Robot {
         this.getMotor1().setPower(0);
         this.getMotor2().setPower(0);
         this.wait(0.2);
+    }
+
+
+    /*
+    Realignment Forward Function
+    Arguments:
+        Color: Of side
+
+    Task:
+        Correct to fit lines based n color
+    */
+    public void RealignmentForward (String color){
+
+
+        boolean checkcolorBlue2 = false;
+        boolean checkcolorBlue3 = false;
+        boolean checkcolorRed2 = false;
+        boolean checkcolorRed3 = false;
+
+        //Blue check
+        if(cs2.blue()> cs2.red() || cs2.blue()> cs2.green() )
+        {
+            if(cs2.blue() > 130){
+                checkcolorBlue2 = true;
+            }
+        }
+
+        if(cs3.blue()> cs3.red() || cs3.blue()> cs3.green() )
+        {
+            if(cs3.blue() > 130){
+                checkcolorBlue2 = true;
+            }
+        }
+
+
+        //Red Check
+        if(cs2.red()> cs2.blue() || cs2.red()> cs2.green() )
+        {
+            if(cs2.red() > 130){
+                checkcolorRed2 = true;
+            }
+        }
+
+        if(cs3.red()> cs3.blue() || cs3.red()> cs3.green() )
+        {
+            if(cs3.blue() > 130){
+                checkcolorRed2 = true;
+            }
+        }
+
+        //Condition
+        switch(color){
+            case "red":
+                while(checkcolorRed2){
+                    this.getMotor1().setPower(-0.5);
+                }
+                while(checkcolorRed3){
+                    this.getMotor2().setPower(0.5);
+                }
+                break;
+            case "blue":
+                while(checkcolorBlue2){
+                    this.getMotor1().setPower(-0.5);
+                }
+                while(checkcolorBlue3){
+                    this.getMotor2().setPower(0.5);
+                }
+                break;
+            case"green":
+                this.getOpMode().telemetry.addData("Well:", "You Suck");
+                break;
+
+        }
+
+
     }
 
 }
