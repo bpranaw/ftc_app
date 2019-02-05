@@ -4,10 +4,7 @@ import static com.sun.tools.doclint.Entity.lt;
 
 @TeleOp(name = "MainTeleOp", group = "Tele OpMode")
 public class MainTeleOpMode extends TeleOpMode {
-    private double rotate = 0;
-    private double speed = 1;
 
-    private boolean pressed = false;
 
     @Override
     public void run() {
@@ -25,6 +22,7 @@ public class MainTeleOpMode extends TeleOpMode {
         double rt = this.getGamepadA().right_trigger;
         double lt = this.getGamepadA().left_trigger;
         double ly2 = this.getGamepadB().left_stick_y;
+        double ry2 = this.getGamepadB().right_stick_y;
 
         boolean rb = this.getGamepadA().right_bumper;
         boolean lb = this.getGamepadA().left_bumper;
@@ -36,7 +34,7 @@ public class MainTeleOpMode extends TeleOpMode {
         double pos = this.getRobot().getServo1().getPosition();
 
 
-
+        /*
         //Aaron's Thing
         if(Double.isNaN(rx) || Double.isNaN(ry)) {
             rx = 0;
@@ -47,9 +45,16 @@ public class MainTeleOpMode extends TeleOpMode {
             lx = 0;
             ly = 0;
         }
+        */
 
+        /*
+        Gamepad: Gamepad A
+        Function: Drivebase Control
+            Individual Functions:
+                Claw
+                Drivetrain
 
-        Driver driver = this.getRobot().getDriver();
+        */
 
         //Claw
         if(open)
@@ -63,11 +68,8 @@ public class MainTeleOpMode extends TeleOpMode {
             this.getRobot().getServo1().setPosition(pos);
         }
 
-        driver.drive();
-
 
         //Drive Base momvent
-
         if(Math.abs(ry) >= Constants.TRIGGER_THRESHOLD || Math.abs(ly) >= Constants.TRIGGER_THRESHOLD) {
             this.getRobot().getMotor1().setPower(ly);
             this.getRobot().getMotor2().setPower(-ry);
@@ -78,47 +80,16 @@ public class MainTeleOpMode extends TeleOpMode {
 
         }
 
+        /*
+        Gamepad: Gamepad B
+        Function: Mineral Recovery
+        Individual Functions:
+            Extended Boy
+            Bucket to Heaven
+        */
 
-        //Hook slide Movement
-      if( rt >= Constants.TRIGGER_THRESHOLD || lt >= Constants.TRIGGER_THRESHOLD )
-        {
-            if (rt > lt)
-            {
-                this.getRobot().getMotor3().setPower(-1);
+        //Bucket to Heaven
 
-            }
-            else
-            {
-                this.getRobot().getMotor3().setPower(1);
-            }
-         }
-        else
-        {
-            this.getRobot().getMotor3().setPower(0);
-        }
-
-        //Suction
-        double pos3= this.getRobot().getServo3().getPosition();
-        double pos4= this.getRobot().getServo4().getPosition();
-        if (rb2){
-            this.getRobot().getServo3().setPosition(1);
-            this.getRobot().getServo3().setPosition(-1);
-        }
-        else if (lb){
-            this.getRobot().getServo3().setPosition(-1);
-            this.getRobot().getServo3().setPosition(1);
-        }
-        else{
-            this.getRobot().getServo3().reset();
-            this.getRobot().getServo4().reset();
-        }
-
-        if(ly2 > 0 || ly2 < 0) {
-            this.getRobot().getMotor4().setPower(ly2);
-        }
-
-
-        this.write("here");
 
     }
 

@@ -15,7 +15,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpMode {
     public static String TAG = "OpMode";
     protected HardwareMap map = null;
-    private String name = "OpMode";
     private Robot robot = null;
     private ElapsedTime timer = new ElapsedTime();
 
@@ -31,17 +30,6 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
         return timer.seconds();
     }
 
-    public boolean isTimerDone(double secs) {
-        return this.getTimer() >= secs;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return this.name;
-    }
 
     public void wait(double seconds) {
         this.startTimer();
@@ -50,6 +38,7 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
     }
 
     public abstract void run() throws InterruptedException;
+
     public abstract void repeat();
 
     @Override
@@ -97,25 +86,10 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
         return this.map;
     }
 
-    public void write(String data) {
-        this.write("INFO", data);
-    }
-
-    public void write(String tag, String data) {
-        Log.write(tag, data);
-        telemetry.addData(Constants.ROBOT_NAME, "\n" + Log.getString());
-        telemetry.update();
-    }
-
-    public void write(String data, boolean asdf) {
-        telemetry.addData(Constants.ROBOT_NAME, data);
-        telemetry.update();
-    }
 
     public Robot getRobot() {
         return this.robot;
     }
-
 
 
     public DcMotor getMotor(String name) {
@@ -131,55 +105,4 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
     }
 
 
-    public boolean isColor(double r, double g, double b, String name) {
-        name = name.toLowerCase(); // get the lower case version of the name
-
-        switch(name) {
-            case "red":
-                if(r >= Constants.COLOR_THRESHOLD)
-                    return true; // it is red
-                break;
-            case "green":
-                if(g >= Constants.COLOR_THRESHOLD)
-                    return true; // it is green
-                break;
-            case "blue":
-                if(b >= Constants.COLOR_THRESHOLD)
-                    return true; // it is blue
-                break;
-            case "white":
-                if(r > Constants.COLOR_THRESHOLD && g > Constants.COLOR_THRESHOLD && b > Constants.COLOR_THRESHOLD)
-                    return true;
-                break;
-            case "black":
-                if(r < Constants.COLOR_THRESHOLD && g < Constants.COLOR_THRESHOLD && b < Constants.COLOR_THRESHOLD)
-                    return true;
-                break;
-            default:
-                // status("Unknown color (" + r + ", " + g + ", " + b + ")."); // unknown color; will get annoying if it is spamming console.
-                return false;
-        }
-
-        return false; // unknown color
-    }
-
-    private double dir = 0;
-
-    public void check() {
-        if(this.getRobot().getServo1() != null && Double.isNaN(this.getRobot().getServo1().getPosition()))
-            this.getRobot().getServo1().setPosition(0); // these are the default positions
-    }
-
-    public void point(double direction) {
-
-        dir = direction;
-    }
-
-    public void drive(double power) {
-        this.getRobot().getMotor1().setPower(power);
-        this.getRobot().getMotor2().setPower(power);
-        this.getRobot().getMotor3().setPower(power);
-        this.getRobot().getMotor4().setPower(power);
-       // this.getRobot().getMotor5().setPower(power);
-    }
 }

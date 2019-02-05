@@ -21,6 +21,8 @@ public class Robot {
     private Servo s3;
     private Servo s4;
 
+    private CRServo crs1;
+
 
     //Sensors
 
@@ -31,8 +33,6 @@ public class Robot {
 
 
     private OpMode mode = null;
-
-    private Driver driver = null;
 
     /* robot constructor, initialize stuff */
     public Robot(OpMode mode) {
@@ -56,9 +56,7 @@ public class Robot {
         this.getMotor2().setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
         this.getMotor3().setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
         this.getMotor4().setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
-       // this.getMotor5().setDriveMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        this.driver = new Driver(this);
 
         // define sensors
         cs1 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color1");
@@ -66,16 +64,9 @@ public class Robot {
         cs3 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color3");
 
 
-        // calibrate sensors
-        if(this.getGyroSensor() != null)
-            this.getGyroSensor().calibrate();
     }
 
 
-    /* get driver object */
-    public Driver getDriver() {
-        return this.driver;
-    }
 
     /* drive for x seconds at x speed */
     /*public void drive(double speed, double time) {
@@ -95,23 +86,6 @@ public class Robot {
         //this.getMotor5().reset();
     }
 
-    /* set power on all motors */
-    public Driver drive(double speed, double angle) {
-        return this.drive(speed, angle, 0.0);
-    }
-
-    /* set power on all motors */
-    public Driver drive(double height, double angle, double rotation) {
-        Driver driver = this.getDriver();
-
-        driver.setHeight(height);
-        driver.setDirection(angle);
-        driver.setRotation(rotation);
-
-        driver.drive();
-
-        return driver;
-    }
 
     /* get motors */
     public Motor getMotor1() {
@@ -144,11 +118,6 @@ public class Robot {
     /* get color sensor */
     public ColorSensor getColorSensor1() { return this.cs1; }
     //public ColorSensor getColorSensor2() { return this.cs2; }
-
-    /* get gyro sensor */
-    public GyroSensor getGyroSensor() {
-        return this.sensorGyro;
-    }
 
     /* wait x seconds */
     public void wait(double seconds) {
