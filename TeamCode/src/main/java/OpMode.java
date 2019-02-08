@@ -10,6 +10,13 @@ import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ThreadPool;
+
+import org.firstinspires.ftc.robotcore.internal.opmode.OpModeManagerImpl;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Disabled
 public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpMode {
@@ -17,6 +24,9 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
     protected HardwareMap map = null;
     private Robot robot = null;
     private ElapsedTime timer = new ElapsedTime();
+    private volatile boolean   isStarted       = false;
+    private volatile boolean   stopRequested   = false;
+    private ExecutorService executorService = null;
 
     public OpMode() {
 
@@ -41,6 +51,27 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
 
     public abstract void repeat();
 
+    public final boolean isStopRequested() {
+        return this.stopRequested || Thread.currentThread().isInterrupted();
+    }
+
+    public final boolean isStarted() {
+        return this.isStarted || Thread.currentThread().isInterrupted();
+    }
+
+    public final boolean opModeIsActive() {
+        boolean isActive = !this.isStopRequested() && this.isStarted();
+        if (isActive) {
+            idle();
+        }
+        return isActive;
+    }
+
+    public final void idle() {
+
+        Thread.yield();
+    }
+
     @Override
     public void init() {
         this.map = hardwareMap;
@@ -57,7 +88,26 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
     }
 
     @Override
-    public void stop() {}
+    public void stop() {
+        // make isStopRequested() return true (and opModeIsActive() return false)
+        stopRequested = true;
+
+        if (executorService != null) {  // paranoia
+
+            // interrupt the linear opMode and shutdown it's service thread
+            executorService.shutdownNow();
+
+            /** Wait, forever, for the OpMode to stop. If this takes too long, then
+             * {@link OpModeManagerImpl#callActiveOpModeStop()} will catch that and take action */
+            try {
+                String serviceName = "user linear op mode";
+                ThreadPool.awaitTermination(executorService, 100, TimeUnit.DAYS, serviceName);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+
+    }
 
     @Override
     public void start() {

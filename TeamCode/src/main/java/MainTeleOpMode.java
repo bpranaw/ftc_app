@@ -1,4 +1,5 @@
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import static com.sun.tools.doclint.Entity.lt;
 
@@ -34,18 +35,7 @@ public class MainTeleOpMode extends TeleOpMode {
         double pos = this.getRobot().getServo1().getPosition();
 
 
-        /*
-        //Aaron's Thing
-        if(Double.isNaN(rx) || Double.isNaN(ry)) {
-            rx = 0;
-            ry = 0;
-        }
 
-        if(Double.isNaN(lx) || Double.isNaN(ly)) {
-            lx = 0;
-            ly = 0;
-        }
-        */
 
         /*
         Gamepad: Gamepad A
@@ -80,6 +70,22 @@ public class MainTeleOpMode extends TeleOpMode {
 
         }
 
+        //Lift
+        if(rt > Constants.TRIGGER_THRESHOLD || lt > Constants.TRIGGER_THRESHOLD){
+            if (rt > lt){
+                this.getRobot().getMotor3().setPower(1);
+            }
+            else if(lt>rt){
+                this.getRobot().getMotor3().setPower(-1);
+            }
+            else
+            {
+                this.getRobot().getMotor3().reset();
+            }
+        }
+
+
+
         /*
         Gamepad: Gamepad B
         Function: Mineral Recovery
@@ -89,6 +95,18 @@ public class MainTeleOpMode extends TeleOpMode {
         */
 
         //Bucket to Heaven
+        if(ly2 > Constants.TRIGGER_THRESHOLD ){
+            this.getRobot().getCRservo1().setDirection(DcMotorSimple.Direction.FORWARD);
+            this.getRobot().getCRservo1().setPower(ly2);
+        }
+        else if(ly2 < -Constants.TRIGGER_THRESHOLD){
+            this.getRobot().getCRservo1().setDirection(DcMotorSimple.Direction.REVERSE);
+            this.getRobot().getCRservo1().setPower(-ly2);
+        }
+        else {
+            this.getRobot().getCRservo1().setPower(0);
+        }
+
 
 
     }

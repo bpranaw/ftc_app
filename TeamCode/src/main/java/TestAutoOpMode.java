@@ -28,11 +28,11 @@ public class TestAutoOpMode extends OpMode {
 
         //Marking
         this.getRobot().Forward(1,1.4);
-        this.getRobot().wait(0.2);
+
         this.getRobot().LRot(1,0.3);
         this.getRobot().wait(1.0);
         this.getRobot().getServo1().setPosition(Constants.Ready_Pos);
-        this.getRobot().wait(2.);
+
 
 
         //Crater

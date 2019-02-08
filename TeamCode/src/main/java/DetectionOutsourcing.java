@@ -56,6 +56,9 @@ public class DetectionOutsourcing extends LinearOpMode {
         Requird variables for Mineral Detection
 
      */
+    public DetectionOutsourcing(boolean yes){
+        if (yes){this.spot = 1;}
+    }
 
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
@@ -147,9 +150,6 @@ public class DetectionOutsourcing extends LinearOpMode {
                         /*
                             Nice Quality space for my code
                         */
-
-
-
 
 
 

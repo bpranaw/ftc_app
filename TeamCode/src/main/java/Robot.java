@@ -19,7 +19,6 @@ public class Robot {
     private Servo s1;
     private Servo s2;
     private Servo s3;
-    private Servo s4;
 
     private CRServo crs1;
 
@@ -29,7 +28,7 @@ public class Robot {
     private ColorSensor cs1 = null;
     private ColorSensor cs2 = null;
     private ColorSensor cs3 = null;
-    private GyroSensor sensorGyro = null;
+
 
 
     private OpMode mode = null;
@@ -46,7 +45,8 @@ public class Robot {
         this.s1 = new Servo(this, this.getOpMode().getServo(Constants.S1_Servo));
         this.s2 = new Servo(this, this.getOpMode().getServo(Constants.S2_Servo));
         this.s3 = new Servo(this, this.getOpMode().getServo(Constants.S3_Servo));
-        this.s4 = new Servo(this, this.getOpMode().getServo(Constants.S4_Servo));
+        this.crs1 = new CRServo(this,this.getOpMode().getCRServo(Constants.CR1_CRservo));
+
        // this.m5 = new Motor(this, this.getOpMode().getMotor(Constants.M5_MOTOR));
         // this.s1 = new Servo(this, this.getOpMode().getServo(Constants.S1_SERVO)); // uncomment to enable servo
         // this.s1.setCenter(0.5);
@@ -108,7 +108,8 @@ public class Robot {
     public Servo getServo1() {return this.s1;}
     public Servo getServo2() {return this.s2;}
     public Servo getServo3() {return this.s3;}
-    public Servo getServo4() {return this.s4;}
+
+    public CRServo getCRservo1(){return this.crs1;}
 
     /* get Opmode */
     public OpMode getOpMode() {
@@ -117,7 +118,9 @@ public class Robot {
 
     /* get color sensor */
     public ColorSensor getColorSensor1() { return this.cs1; }
-    //public ColorSensor getColorSensor2() { return this.cs2; }
+    public ColorSensor getColorSensor2() { return this.cs2; }
+    public ColorSensor getColorSensor3() { return this.cs3; }
+
 
     /* wait x seconds */
     public void wait(double seconds) {
@@ -224,70 +227,25 @@ public class Robot {
     Task:
         Correct to fit lines based n color
     */
-    public void RealignmentForward (String color){
-
-
-        boolean checkcolorBlue2 = false;
-        boolean checkcolorBlue3 = false;
-        boolean checkcolorRed2 = false;
-        boolean checkcolorRed3 = false;
-
-        //Blue check
-        if(cs2.blue()> cs2.red() || cs2.blue()> cs2.green() )
-        {
-            if(cs2.blue() > 130){
-                checkcolorBlue2 = true;
+    public void RealignmentBlue ( double power){
+        while(this.getColorSensor2().blue() < 4 || this.getColorSensor3().blue() < 4) {
+            if (this.getColorSensor2().blue() < 4) {
+                this.getMotor1().setPower(power / 2);
+            } else if (this.getColorSensor3().blue() < 4) {
+                this.getMotor2().setPower(-power / 2);
             }
-        }
-
-        if(cs3.blue()> cs3.red() || cs3.blue()> cs3.green() )
-        {
-            if(cs3.blue() > 130){
-                checkcolorBlue2 = true;
+            else {
+                this.getMotor1().setPower(0);
+                this.getMotor2().setPower(0);
             }
+            this.getColorSensor2().blue();
+            this.getColorSensor3().blue();
         }
-
-
-        //Red Check
-        if(cs2.red()> cs2.blue() || cs2.red()> cs2.green() )
-        {
-            if(cs2.red() > 130){
-                checkcolorRed2 = true;
-            }
-        }
-
-        if(cs3.red()> cs3.blue() || cs3.red()> cs3.green() )
-        {
-            if(cs3.blue() > 130){
-                checkcolorRed2 = true;
-            }
-        }
-
-        //Condition
-        switch(color){
-            case "red":
-                while(checkcolorRed2){
-                    this.getMotor1().setPower(-0.5);
-                }
-                while(checkcolorRed3){
-                    this.getMotor2().setPower(0.5);
-                }
-                break;
-            case "blue":
-                while(checkcolorBlue2){
-                    this.getMotor1().setPower(-0.5);
-                }
-                while(checkcolorBlue3){
-                    this.getMotor2().setPower(0.5);
-                }
-                break;
-            case"green":
-                this.getOpMode().telemetry.addData("Well:", "You Suck");
-                break;
-
-        }
-
+        this.getMotor1().setPower(0);
+        this.getMotor1().setPower(0);
+        this.wait(0.2);
 
     }
+
 
 }

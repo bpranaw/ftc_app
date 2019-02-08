@@ -19,15 +19,8 @@ public class TestAuto extends OpMode {
 
     @Override
     public void run() {
-        try {
-            DetectionOutsourcing poscheck = new DetectionOutsourcing();
-            poscheck.setKey("ATGargf/////AAABmWpuExvAEkA8vwn+QkRXwaaGomLnTVATqcPQzCbbcuGhMobzznoB1HNxj/6ESuGF0KGCHuIDeGGkEKbOcFG4WykKkAUIamhENTpalbNyBkeDe0SapXIm+ddAZaLFdCwfonRfSYJCytI3D0JyfD7AQKBVPFnX4LwNjl5NCPzqnCAlFMEe55zcQP2CwGKVLoJ+hyCtCT0S+tD4xzAd09GFY18ZbWFDUm8rjTBlfywGUHl/WbSpxDb6gBaG9y2ZfV8/PAZaoq/AppVgKvKyzE80oEm09cbSTflsT4X7aAwwGOIx0ZQTGTplt0OV5dvQxEWx0bazJvf83FBtWjSTeinrr3C7NNMXLwCFlGogVTa6I8n2");
-
-            poscheck.runOpMode();
-        } catch (NullPointerException e) {
-            telemetry.addData("Error", "You done goofe.");
-        } catch (VuforiaException a) {
-            telemetry.addData("Error", "You done goofed.");
+        while(this.getRobot().getOpMode().opModeIsActive()) {
+            this.getRobot().RealignmentBlue(0.5);
         }
     }
 
