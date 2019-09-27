@@ -21,6 +21,7 @@ public class Robot {
     private Servo s3;
 
     private CRServo crs1;
+    private CRServo crs2;
 
 
     //Sensors
@@ -42,10 +43,12 @@ public class Robot {
         this.m2 = new Motor(this, this.getOpMode().getMotor(Constants.M2_MOTOR));
         this.m3 = new Motor(this, this.getOpMode().getMotor(Constants.M3_MOTOR));
         this.m4 = new Motor(this, this.getOpMode().getMotor(Constants.M4_MOTOR));
+        this.m5 = new Motor(this, this.getOpMode().getMotor(Constants.M5_Motor));
         this.s1 = new Servo(this, this.getOpMode().getServo(Constants.S1_Servo));
         this.s2 = new Servo(this, this.getOpMode().getServo(Constants.S2_Servo));
         this.s3 = new Servo(this, this.getOpMode().getServo(Constants.S3_Servo));
         this.crs1 = new CRServo(this,this.getOpMode().getCRServo(Constants.CR1_CRservo));
+        this.crs2 = new CRServo(this,this.getOpMode().getCRServo(Constants.CR2_CRservo));
 
        // this.m5 = new Motor(this, this.getOpMode().getMotor(Constants.M5_MOTOR));
         // this.s1 = new Servo(this, this.getOpMode().getServo(Constants.S1_SERVO)); // uncomment to enable servo
@@ -62,6 +65,7 @@ public class Robot {
         cs1 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color1");
         cs2 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color2");
         cs3 = this.getOpMode().getHardwareMap().get(ColorSensor.class, "color3");
+
 
 
     }
@@ -83,6 +87,9 @@ public class Robot {
         this.getMotor2().reset();
         this.getMotor3().reset();
         this.getMotor4().reset();
+        this.getMotor5().reset();
+        this.getServo3().reset();
+        this.getServo1().reset();
         //this.getMotor5().reset();
     }
 
@@ -100,6 +107,7 @@ public class Robot {
     public Motor getMotor4() {
         return this.m4;
     }
+    public Motor getMotor5() { return this.m5;}
    /* public Motor getMotor5() {
         return this.m5;
     }
@@ -110,6 +118,7 @@ public class Robot {
     public Servo getServo3() {return this.s3;}
 
     public CRServo getCRservo1(){return this.crs1;}
+    public CRServo getCRServo2(){return this.crs2;}
 
     /* get Opmode */
     public OpMode getOpMode() {

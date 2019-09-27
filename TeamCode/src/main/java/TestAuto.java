@@ -19,9 +19,15 @@ public class TestAuto extends OpMode {
 
     @Override
     public void run() {
-        while(this.getRobot().getOpMode().opModeIsActive()) {
-            this.getRobot().RealignmentBlue(0.5);
-        }
+
+       this.getRobot().getMotor5().setPower(-0.5);
+       this.wait(1.);
+       this.getRobot().getMotor5().setPower(0.5);
+       this.wait(1.0);
+       this.getRobot().getMotor5().setPower(0);
+      //
+        // - this.getRobot().Forward(1,3);
+
     }
 
     @Override

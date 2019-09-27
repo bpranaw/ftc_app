@@ -3,7 +3,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import static com.sun.tools.doclint.Entity.lt;
 
-@TeleOp(name = "MainTeleOp", group = "Tele OpMode")
+@TeleOp(name = "TeleOp", group = "Tele OpMode")
 public class MainTeleOpMode extends TeleOpMode {
 
 
@@ -12,6 +12,8 @@ public class MainTeleOpMode extends TeleOpMode {
         // this runs when you tap the play button
         this.wait(1.0);
         this.getRobot().getServo1().setPosition(Constants.Rest_Pos);
+        this.getRobot().getColorSensor2().enableLed(false);
+        this.getRobot().getColorSensor3().enableLed(false);
     }
 
     @Override
@@ -34,6 +36,11 @@ public class MainTeleOpMode extends TeleOpMode {
         boolean close = this.getGamepadA().x;
         double pos = this.getRobot().getServo1().getPosition();
 
+        double gate_pos = this.getRobot().getServo2().getPosition();
+        double gate_open = this.getGamepadB().left_trigger;
+        double gate_close = this.getGamepadB().right_trigger;
+
+
 
 
 
@@ -47,6 +54,7 @@ public class MainTeleOpMode extends TeleOpMode {
         */
 
         //Claw
+        /*
         if(open)
         {
             this.getRobot().getServo1().setPosition(Constants.Close_Pos);
@@ -57,32 +65,36 @@ public class MainTeleOpMode extends TeleOpMode {
         else {
             this.getRobot().getServo1().setPosition(pos);
         }
-
+    */
 
         //Drive Base momvent
         if(Math.abs(ry) >= Constants.TRIGGER_THRESHOLD || Math.abs(ly) >= Constants.TRIGGER_THRESHOLD) {
-            this.getRobot().getMotor1().setPower(ly);
-            this.getRobot().getMotor2().setPower(-ry);
+            this.getRobot().getMotor1().setPower(-ry);
+            this.getRobot().getMotor2().setPower(ly);
             }
-            else
+            else if (Math.abs(ry) <= Constants.TRIGGER_THRESHOLD || Math.abs(ly) <= Constants.TRIGGER_THRESHOLD)
                 {
-            this.getRobot().reset();
+                    this.getRobot().getMotor1().setPower(-ry);
+                    this.getRobot().getMotor2().setPower(ly);
 
+        }
+        else{
+            this.getRobot().getMotor1().reset();
+            this.getRobot().getMotor2().reset();
         }
 
         //Lift
-        if(rt > Constants.TRIGGER_THRESHOLD || lt > Constants.TRIGGER_THRESHOLD){
-            if (rt > lt){
+        if(open){
                 this.getRobot().getMotor3().setPower(1);
             }
-            else if(lt>rt){
+            else if(close){
                 this.getRobot().getMotor3().setPower(-1);
             }
             else
             {
                 this.getRobot().getMotor3().reset();
             }
-        }
+
 
 
 
@@ -95,19 +107,52 @@ public class MainTeleOpMode extends TeleOpMode {
         */
 
         //Bucket to Heaven
-        if(ly2 > Constants.TRIGGER_THRESHOLD ){
+        if(lb2){
             this.getRobot().getCRservo1().setDirection(DcMotorSimple.Direction.FORWARD);
-            this.getRobot().getCRservo1().setPower(ly2);
+            this.getRobot().getCRservo1().setPower(1);
         }
-        else if(ly2 < -Constants.TRIGGER_THRESHOLD){
-            this.getRobot().getCRservo1().setDirection(DcMotorSimple.Direction.REVERSE);
-            this.getRobot().getCRservo1().setPower(-ly2);
+        else if(rb2){
+            this.getRobot().getCRservo1().setPower(-1);
         }
         else {
             this.getRobot().getCRservo1().setPower(0);
         }
 
+        //Stairway to Heaven
+        if(ly2 > Constants.TRIGGER_THRESHOLD ){
+            this.getRobot().getMotor4().setPower(ly2);
+        }
+        else if(ly2 < -Constants.TRIGGER_THRESHOLD){
+            this.getRobot().getMotor4().setPower(ly2);
+        }
+        else {
+            this.getRobot().getMotor4().setPower(0);
+        }
 
+        //Ladder to Heaven
+        if(ry2 > Constants.TRIGGER_THRESHOLD ){
+            this.getRobot().getMotor5().setPower(ry2);
+        }
+        else if(ry2 < -Constants.TRIGGER_THRESHOLD){
+            this.getRobot().getMotor5().setPower(ry2);
+        }
+        else {
+            this.getRobot().getMotor5().setPower(0);
+        }
+
+        //Gate
+
+        if(gate_open > Constants.TRIGGER_THRESHOLD || gate_close < Constants.TRIGGER_THRESHOLD)
+        {
+            this.getRobot().getCRServo2().setPower(gate_open);
+        }
+        else if (gate_close > Constants.TRIGGER_THRESHOLD){
+            this.getRobot().getCRServo2().setPower(-gate_close);
+        }
+        else
+        {
+            this.getRobot().getCRServo2().setPower(0);
+        }
 
     }
 

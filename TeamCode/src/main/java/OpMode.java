@@ -67,6 +67,20 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
         return isActive;
     }
 
+
+    public synchronized void waitForStart(){
+        while(!isStarted()){
+            synchronized (this){
+                try{this.wait();
+            }catch (InterruptedException e){
+                Thread.currentThread().interrupt();
+                return;
+                }
+            }
+        }
+
+
+    }
     public final void idle() {
 
         Thread.yield();
@@ -90,7 +104,9 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
     @Override
     public void stop() {
         // make isStopRequested() return true (and opModeIsActive() return false)
+        this.getRobot().reset();
         stopRequested = true;
+
 
         if (executorService != null) {  // paranoia
 
@@ -120,6 +136,7 @@ public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpM
             this.getRobot().getMotor2().getDcMotor().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             this.getRobot().getMotor3().getDcMotor().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             this.getRobot().getMotor4().getDcMotor().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            this.getRobot().getMotor5().getDcMotor().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
            // this.getRobot().getMotor5().getDcMotor().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
 

@@ -12,18 +12,7 @@ public class TestAuto2 extends OpMode {
 
     @Override
     public void run() {
-        if(!blue1){
-            this.getRobot().getMotor1().setPower(0.5);
-        }
-        else if(!blue2){
-            this.getRobot().getMotor2().setPower(-0.5);
-        }
-        else
-        {
-            this.getRobot().getMotor1().setPower(0);
-            this.getRobot().getMotor2().setPower(0);
-        }
-        this.wait(0.2);
+    this.getRobot().Land(1.0,1);
 
 
 
@@ -32,12 +21,6 @@ public class TestAuto2 extends OpMode {
 
     @Override
     public void repeat() {
-        if(this.getRobot().getColorSensor2().blue() < Constants.COLOR_THRESHHOLD){
-            this.blue1 = true;
-        }
-        if(this.getRobot().getColorSensor3().blue() < Constants.COLOR_THRESHHOLD){
-            this.blue2 = true;
-        }
 
 
 

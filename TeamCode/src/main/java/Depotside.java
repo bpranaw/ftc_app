@@ -1,44 +1,30 @@
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.hardware.DcMotor;
-
-import static java.lang.Thread.currentThread;
-import static java.lang.Thread.sleep;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcore.external.Const;
 
 
 @Autonomous(name = "DepotSideAuto", group = "Autonomous OpMode")
 //@Disabled
-public class TestAutoOpMode extends OpMode {
-    public boolean check;
+public class Depotside extends OpMode {
+
     @Override
     public void run() {
         // Values
+            //Hold Onto marker
+            this.getRobot().getServo1().setPosition(Constants.Close_Pos);
+        this.getRobot().getMotor5().setPower(1);
+        this.wait(0.5);
 
+        this.getRobot().Land(1, 10);
 
-        //Hold Onto marker
-        this.getRobot().getServo1().setPosition(Constants.Close_Pos);
-        this.getRobot().getServo2().setPosition(Constants.Up_Pos);
+            //Landing / Unhooking
+        this.getRobot().Forward(1,1.75);
+        this.getRobot().Land(-1, 1);
 
-        //Landing / Unhooking
-        this.getRobot().Land(1, 10.3);
+            //Crater
+            this.getRobot().RRot(1, 0.6);
+            this.getRobot().getServo1().setPosition(Constants.Rest_Pos);
+            this.getRobot().RRot(0.85,3);
+            this.getRobot().Forward(1,1.75);
 
-        //Marking
-        this.getRobot().Forward(1,1.4);
-
-        this.getRobot().LRot(1,0.3);
-        this.getRobot().wait(1.0);
-        this.getRobot().getServo1().setPosition(Constants.Ready_Pos);
-
-
-
-        //Crater
-        this.getRobot().LRot(1,0.23);
-        this.getRobot().Forward(1,2.2);
-        this.getRobot().RRot(1,0.3);
 
 
 
@@ -94,16 +80,13 @@ public class TestAutoOpMode extends OpMode {
         this.getRobot().Forward(1,3);
 */
 
+
     }
 
     @Override
     public void repeat() {
         //this.getRobot().getMotor1().setPower(1);
         //this.getRobot().getMotor2().setPower(1);\
-        if(check){
-        this.getRobot().Forward(0,1000.0);
-        }
-
 
 
        /*
@@ -120,6 +103,7 @@ public class TestAutoOpMode extends OpMode {
     @Override
     public void stop() {
       //  this.getRobot().getMotor5().setPower(0);
+        this.getRobot().getOpMode().requestOpModeStop();
 
     }
 }
