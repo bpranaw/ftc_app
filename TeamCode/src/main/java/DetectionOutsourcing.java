@@ -48,6 +48,13 @@ import java.util.List;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
+/*
+    NOT IN USE
+    Alternative code given by Team 4097 that has Vuforia already integrated.
+    If Vuforia bugs cannot be fixed, this may be used as an alternative to
+    the main OpMode
+
+ */
 @Autonomous(name = "DetectionOutscourcing", group = "Autonomous OpMode")
 
 public class DetectionOutsourcing extends LinearOpMode {
