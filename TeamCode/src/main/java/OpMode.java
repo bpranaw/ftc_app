@@ -17,7 +17,9 @@ import org.firstinspires.ftc.robotcore.internal.opmode.OpModeManagerImpl;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
-
+/*
+Imported FIRST OP Mode
+ */
 @Disabled
 public abstract class OpMode extends com.qualcomm.robotcore.eventloop.opmode.OpMode {
     public static String TAG = "OpMode";

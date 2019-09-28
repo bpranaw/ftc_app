@@ -1,6 +1,28 @@
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+/*
+    Class: Servo
 
+    Access: Public
+
+    Purpose: Allow any Servo instances to perform the functions of the servo in a
+    cleaner/easier to read way than the original servo class.
+
+    Arguments: servo (imported FIRST Code)
+
+    Functions: setPosition
+               check
+               setAngle
+               getAngle
+               setMultiplier
+               getMultiplier
+               calibrate
+               reset
+               getCenter
+               getRobot
+
+    Output: none
+ */
 public class Servo {
     private com.qualcomm.robotcore.hardware.Servo servo = null;
     private Robot robot = null;

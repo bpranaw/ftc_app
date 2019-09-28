@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
                getDirection
 
     Output: none
- */
+*/
 
 public class CRServo
 {
