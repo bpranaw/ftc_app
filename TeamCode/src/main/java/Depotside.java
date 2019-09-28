@@ -1,25 +1,46 @@
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+/*
+    Class: Depotside
 
+    Access: Public
+
+    Purpose: Execute functions to complete the Autonomous portion of the competition on the Depotside.
+    Is initialized on the Driver's Station phone app
+
+    Arguments: None
+
+    Outputs: None
+ */
 @Autonomous(name = "DepotSideAuto", group = "Autonomous OpMode")
-//@Disabled
+
 public class Depotside extends OpMode {
 
     @Override
-    public void run() {
-        // Values
-            //Hold Onto marker
+    public void run()
+    {
+        /*
+        Marker Secure
+        Notes: Secures grip on the team marker upon initialization
+         */
             this.getRobot().getServo1().setPosition(Constants.Close_Pos);
-        this.getRobot().getMotor5().setPower(1);
-        this.wait(0.5);
 
-        this.getRobot().Land(1, 10);
+        /*
+        Notes: Executes the landing function in the Robot Class to bring the robot
+        from the lander to the ground and unlatches the hook.
+         */
+            this.getRobot().Land(1, 10);
 
-            //Landing / Unhooking
-        this.getRobot().Forward(1,1.75);
-        this.getRobot().Land(-1, 1);
+        /*
+        Notes: Moves out of the Landing area and retracts lifting mechanism to prevent damage
+         */
+            this.getRobot().Forward(1,1.75);
+            this.getRobot().Land(-1, 1);
 
-            //Crater
+        /*
+        Crater Parking
+        Notes: Moves the robot from the depot to the crater to park
+         */
             this.getRobot().RRot(1, 0.6);
             this.getRobot().getServo1().setPosition(Constants.Rest_Pos);
             this.getRobot().RRot(0.85,3);
@@ -28,7 +49,9 @@ public class Depotside extends OpMode {
 
 
 
-/*
+        /*
+        All code past here has been commented out due needing bug fixes and intensive testing.
+
 
 
 
@@ -84,26 +107,8 @@ public class Depotside extends OpMode {
     }
 
     @Override
-    public void repeat() {
-        //this.getRobot().getMotor1().setPower(1);
-        //this.getRobot().getMotor2().setPower(1);\
-
-
-       /*
-        this.getRobot().getMotor5().setPower(0.1);
-
-            this.getRobot().getMotor1().setPower(-0.25);
-            this.getRobot().getMotor2().setPower(0.25);
-            this.getRobot().getMotor3().setPower(0.25);
-            this.getRobot().getMotor4().setPower(-0.25);
-*/
-
-    }
+    public void repeat(){}
 
     @Override
-    public void stop() {
-      //  this.getRobot().getMotor5().setPower(0);
-        this.getRobot().getOpMode().requestOpModeStop();
-
-    }
+    public void stop(){}
 }
