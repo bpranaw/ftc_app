@@ -1,11 +1,23 @@
 import com.qualcomm.robotcore.hardware.DcMotor;
+/*
+    Class: Encoder
 
+    Access: Public
+
+    Purpose: To measure the rotations performed by the motor and convert them into useful units
+
+    Arguments: Instances of motors
+
+    Outputs: None
+ */
 class Encoder {
+
     private Motor motor = null;
     private double inchespertick = 136.5;
     private double offset = 0;
 
-    public Encoder(Motor motor) {
+    //Constructor
+        public Encoder(Motor motor) {
         this.motor = motor;
     }
 
