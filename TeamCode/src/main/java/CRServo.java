@@ -1,31 +1,93 @@
-import android.graphics.Path;
-
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+/*
+    Class: CRServo
 
-public class CRServo {
-   private com.qualcomm.robotcore.hardware.CRServo crservo = null;
-    Robot robot;
+    Access: Public
 
-    double power;
+    Purpose: Allow any CRServo instances to perform the functions of the servo in a
+    cleaner/easier to read way than the original crservo class.
 
-  public CRServo(Robot robot, com.qualcomm.robotcore.hardware.CRServo crservo){
-    this.robot = robot;
-    this.crservo = crservo;
-  }
+    Arguments: crservo (imported FIRST Code)
 
-  public void setPower(double power){this.getCRServo().setPower(power);}
+    Functions: setPower
+               setDirection
+               getDirection
 
-  public void setDirection(DcMotorSimple.Direction direction){this.getCRServo().setDirection(direction);}
+    Output: none
+ */
+
+public class CRServo
+{
+   //Createsan instance of the FIRST CRservo
+   private com.qualcomm.robotcore.hardware.CRServo crservo;
+
+   //Creates an instance of the Robot Class
+       Robot robot;
+
+        //Constructor to link the FIRST CRservo to our CRServo Class and our Robot Class
+           public CRServo(Robot robot, com.qualcomm.robotcore.hardware.CRServo crservo)
+           {
+            this.robot = robot;
+            this.crservo = crservo;
+           }
 
 
-  //retrieve Data
+  //Servo control Methods
 
-  public DcMotorSimple.Direction getDirection (){return this.getCRServo().getDirection();}
+      /*
+      Function: setPower
 
-  public double getPower() { return this.getCRServo().getPower();}
+      Purpose: To send a number value inbetween -1 and 1 to send to the CRServo
+      that it'll use as a power value
+
+      Arguments: power (double)
+       */
+            public void setPower(double power){this.getCRServo().setPower(power);}
+
+      /*
+      Function: setDirection
+
+      Purpose: To set the direction of rotation forward or backward
+
+       Arguments: Direction Class imported from DCMotor (FORWARD or REVERSE)
+       */
+            public void setDirection(DcMotorSimple.Direction direction){this.getCRServo().setDirection(direction);}
 
 
-  public com.qualcomm.robotcore.hardware.CRServo getCRServo() {return this.crservo;}
+   //Data Retrieval methods
+
+       /*
+       Function: getDirection
+
+       Purpose: Retrieves information on whether Servo is forward or reverse
+
+       Arguments: None
+
+       Outputs: Direction (Imported Class)
+       */
+            public DcMotorSimple.Direction getDirection (){return this.getCRServo().getDirection();}
+
+        /*
+        Function: getPower
+
+        Purpose: Retrieves information on what the power is currently set at.
+
+        Arguments: None
+
+        Outputs: Power(Double
+        */
+            public double getPower() { return this.getCRServo().getPower();}
+
+        /*
+        Function: getCRServo
+
+        Purpose: Allows other classes to access the functions within a created instance of a CRservo class
+
+        Arguments: None
+
+        Outputs: the specific instance of the crservo
+        */
+            public com.qualcomm.robotcore.hardware.CRServo getCRServo() {return this.crservo;}
 
 
 }
