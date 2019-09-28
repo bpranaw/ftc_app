@@ -1,0 +1,42 @@
+Summary of Classes/ Hiearchy:
+
+Constants - Contains constants, variables and links the hardware as manipulable additions to the code
+
+Robot- The class that controls all aspects of the robot/ ties all of the classes together
+
+    OpModes- Run on the FTC Driver Stations and FTC Robot Controllers. They are the Code actually
+    affect the hardware
+
+        Opmode- The FIRST Opmode that allows for basic connections between Hardware and Software
+
+            TeleOP Modes- Opmodes that allow for driver control of the robots
+
+
+                MainTeleOpMode- Allows for driver control of the robot
+
+
+            Autonomous- Opmodes that control the robot for the Autonomous portion of the competition
+
+                Craterside- An Autonomous Opmode intended to be used on the crater side of the field
+
+                Depotside- An Autonomous Opmode intended to be used on the depot side of the field
+
+                DetectionOutsourcing- An Autonomous Opmode given by a fellow Tigard High School team
+                that has Vuforia properly integrated into it. It's to be used as an example for integrating
+                Vuforia into our own code
+
+                TestAuto- A test Autonomous Opmode
+
+                TestAuto2- A Test Autonomous Opmode
+
+    Classes Related to Hardware:
+        Encoder- Counts rotations of hte motor and turns them into useful units
+        Motor- Allows for a link between hardware and software for MOTORS
+        Servo- Allows for a link between hardware and software for SERVOS
+        CRServo- Allows for a link between hardware and software for CRServos
+        
+
+
+
+
+
