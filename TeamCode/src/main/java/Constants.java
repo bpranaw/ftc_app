@@ -13,7 +13,8 @@ import com.qualcomm.robotcore.hardware.configuration.I2cSensor;
     Outputs: None
  */
 
-public class Constants {
+public class Constants
+{
     /*
     License Key For Vuforia
 
@@ -29,36 +30,36 @@ public class Constants {
 
     */
 
-    // Definitions of Motors
+        // Definitions of Motors
 
-    public static final String M1_MOTOR = "motor1";
-    public static final String M2_MOTOR = "motor2";
-    public static final String M3_MOTOR = "motor3";
-    public static final String M4_MOTOR = "motor4";
-    public static final String M5_Motor = "motor5";
+            public static final String M1_MOTOR = "motor1";
+            public static final String M2_MOTOR = "motor2";
+            public static final String M3_MOTOR = "motor3";
+            public static final String M4_MOTOR = "motor4";
+            public static final String M5_Motor = "motor5";
 
-    // Definitions of Limited Rotation Servos
+        // Definitions of Limited Rotation Servos
 
-    public static final String S1_Servo = "servo1";
-    public static final String S2_Servo = "servo2";
-    public static final String S3_Servo = "servo3";
+            public static final String S1_Servo = "servo1";
+            public static final String S2_Servo = "servo2";
+            public static final String S3_Servo = "servo3";
 
-    //Definitions of Continuous Rotation Servos (CRservo)
+        //Definitions of Continuous Rotation Servos (CRservo)
 
-    public static final String CR1_CRservo = "crservo1";
-    public static final String CR2_CRservo = "crservo2";
+            public static final String CR1_CRservo = "crservo1";
+            public static final String CR2_CRservo = "crservo2";
 
 
 
     //Threshold Values
 
-    public static final double TRIGGER_THRESHOLD = 0.1;
+        public static final double TRIGGER_THRESHOLD = 0.1;
 
     /*
     Threshold for Color Sensors in detecting Yellow
     Currently requires further testing, therefore it's not implemented in the functioning code
      */
-    public static final double COLOR_THRESHHOLD = 5;
+        public static final double COLOR_THRESHHOLD = 5;
 
 
     /*
@@ -72,8 +73,8 @@ public class Constants {
         Notes: Currently needs some readjustments and testing, but still functional.
          */
 
-    public static final double Rest_Pos = 0.7;
-    public static final double Close_Pos = 0.4;
+            public static final double Rest_Pos = 0.7;
+            public static final double Close_Pos = 0.4;
 
         /*
         Positions for the Side Arm
@@ -81,17 +82,17 @@ public class Constants {
         Notes: Not currently in use due to lack of time to test Autonomous routes
          */
 
-    public static final double Down_Pos = 0.55;
-    public static final double Up_Pos = 1;
-    public static final double Ready_Pos = 0.8;
-    /*
-    Positions for the Gate on the main collection mechanism
+            public static final double Down_Pos = 0.55;
+            public static final double Up_Pos = 1;
+            public static final double Ready_Pos = 0.8;
+        /*
+        Positions for the Gate on the main collection mechanism
 
-    Notes: Not currently in use due to sensitivity issues with controllers on hand.
-    Could be useful in the future with some testing, but the gate function is currently linked to thumbstick control
-    */
-    public static final double Gate_Open = 1;
-    public static final double Gate_Close = 0;
+        Notes: Not currently in use due to sensitivity issues with controllers on hand.
+        Could be useful in the future with some testing, but the gate function is currently linked to thumbstick control
+        */
+            public static final double Gate_Open = 1;
+            public static final double Gate_Close = 0;
 
 
 
