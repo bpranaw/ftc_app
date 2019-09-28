@@ -2,9 +2,19 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 
+/*
+    Class: TestAuto2
 
+    Access: Public
+
+    Purpose: No definitive purpose other than testing individual features and unrefined implementations.
+
+    Arguments: None
+
+    Outputs: None
+ */
 @Autonomous(name = "TestAuto2", group = "Autonomous OpMode")
-//@Disabled
+
 public class TestAuto2 extends OpMode {
 
     private boolean blue1 = false;

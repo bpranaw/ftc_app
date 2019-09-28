@@ -12,9 +12,19 @@ import org.firstinspires.ftc.robotcore.internal.vuforia.VuforiaException;
 
 import java.util.Locale;
 
+/*
+    Class: TestAuto
 
+    Access: Public
+
+    Purpose: No definitive purpose other than testing individual features and unrefined implementations.
+
+    Arguments: None
+
+    Outputs: None
+ */
 @Autonomous(name = "TestAuto", group = "Autonomous OpMode")
-//@Disabled
+
 public class TestAuto extends OpMode {
 
     @Override
